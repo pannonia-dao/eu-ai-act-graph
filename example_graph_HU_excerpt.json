@@ -1,0 +1,69 @@
+{
+  "_note": "This is a representative example excerpt. Real output will contain all parsed articles, obligations, terms, and edges from the downloaded EU AI Act text.",
+  "meta": {
+    "language": "HU",
+    "source_url": "https://eur-lex.europa.eu/legal-content/HU/TXT/HTML/?uri=OJ:L_202401689",
+    "retrieved_at": "2025-02-28T10:00:00+00:00",
+    "content_type": "html"
+  },
+  "stats": {
+    "n_articles": 113,
+    "n_annexes": 9,
+    "n_obligations": 340,
+    "n_terms": 65,
+    "n_edges": 812
+  },
+  "nodes": [
+    {
+      "id": "Art. 3",
+      "type": "Article",
+      "label": "Fogalommeghatározások",
+      "title": "Fogalommeghatározások"
+    },
+    {
+      "id": "Art. 24",
+      "type": "Article",
+      "label": "A forgalmazók kötelezettségei",
+      "title": "A forgalmazók kötelezettségei"
+    },
+    {
+      "id": "obl_art24_01",
+      "type": "Obligation",
+      "label": "A forgalmazók kötelesek ellenőrizni, hogy a nagy kockázatú MI-rendszer rendelkezik-e a megfelelő megfelelőségi nyilatkozattal…",
+      "full_text": "A forgalmazók kötelesek ellenőrizni, hogy a nagy kockázatú MI-rendszer rendelkezik-e a megfelelő megfelelőségi nyilatkozattal és a CE-jelöléssel, valamint hogy a szolgáltató eleget tett-e a 47–49. cikkben foglalt kötelezettségeinek.",
+      "topic_tags": ["documentation", "conformity"]
+    },
+    {
+      "id": "distributor",
+      "type": "Role",
+      "label": "distributor"
+    },
+    {
+      "id": "provider",
+      "type": "Role",
+      "label": "provider"
+    },
+    {
+      "id": "term_mesterseges_intelligencia_rendszer",
+      "type": "Term",
+      "label": "mesterséges intelligencia rendszer",
+      "definition": "olyan gépi alapú rendszer, amelyet bizonyos mértékű autonómiával működő, és amely az emberi által meghatározott célkitűzések eléréséhez explicit vagy implicit célok alapján, bemenetekből következtetések levonásával kimeneteket – például előrejelzéseket, tartalmakat, ajánlásokat vagy döntéseket – generál…"
+    },
+    {
+      "id": "Annex III",
+      "type": "Annex",
+      "label": "Annex III"
+    }
+  ],
+  "edges": [
+    {"source": "Art. 24", "target": "obl_art24_01", "type": "imposes"},
+    {"source": "obl_art24_01", "target": "distributor", "type": "applies_to"},
+    {"source": "Art. 24", "target": "Art. 47", "type": "references"},
+    {"source": "Art. 24", "target": "Art. 48", "type": "references"},
+    {"source": "Art. 24", "target": "Art. 49", "type": "references"},
+    {"source": "Art. 24", "target": "Art. 16", "type": "references"},
+    {"source": "Art. 3", "target": "term_mesterseges_intelligencia_rendszer", "type": "defines"},
+    {"source": "Art. 6", "target": "Annex III", "type": "references"},
+    {"source": "obl_art24_01", "target": "Art. 47", "type": "references"}
+  ]
+}
