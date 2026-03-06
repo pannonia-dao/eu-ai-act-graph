@@ -1010,8 +1010,14 @@ def streamlit_app() -> None:
             from pyvis.network import Network
             import streamlit.components.v1 as components
 
-            net = Network(height="600px", width="100%", directed=True,
-                          bgcolor="#1a1a2e", font_color="white")
+            try:
+                net = Network(height="600px", width="100%", directed=True,
+                              bgcolor="#1a1a2e", font_color="white",
+                              cdn_resources="in_line")
+            except TypeError:
+                # pyvis < 0.3.0 fallback
+                net = Network(height="600px", width="100%", directed=True,
+                              bgcolor="#1a1a2e", font_color="white")
 
             COLOR_MAP = {
                 "Article": "#4e9af1",
@@ -1034,7 +1040,19 @@ def streamlit_app() -> None:
                     net.add_edge(e["source"], e["target"], title=e["type"])
 
             net.set_options("""{"physics":{"stabilization":{"iterations":100}}}""")
-            html_str = net.generate_html()
+            try:
+                html_str = net.generate_html(notebook=False)
+            except TypeError:
+                html_str = net.generate_html()
+            if not html_str:
+                import tempfile, os
+                with tempfile.NamedTemporaryFile(suffix=".html", delete=False,
+                                                mode="w", encoding="utf-8") as f:
+                    net.save_graph(f.name)
+                    tmp = f.name
+                with open(tmp, encoding="utf-8") as f:
+                    html_str = f.read()
+                os.unlink(tmp)
             components.html(html_str, height=620, scrolling=True)
         except ImportError:
             st.info(
